@@ -1,26 +1,38 @@
 % Simulation of Twiddle Factor
 % Wn = e^(-j(2*pi)/N)
 % where n is the number of partitions in DFT
-x = [1 2 3 4 5];
-N = length(x);
+N = input('Number of samples');
 Wn = exp((-1j)*(2*pi/N));
 disp("Twiddle Factor"+Wn);
 
 % Properties
+
 % Periodic
-k = input('Any integer between 0 to 4');
-LHS = Wn^(k)
-RHS = Wn^(k+N)
-if(isequal(LHS,RHS))
+% Wn^(nk + Z(N)) = Wn^(nk) where Z is any integer
+Z = input('Any integer: ');
+n = input('n ');
+k = input('k ');
+LHS = Wn^(n*k);
+disp("LHS = "+LHS);
+RHS = Wn^(n*k+(Z*N));
+disp("RHS = "+RHS);
+disp("LHS-RHS = "+abs(LHS-RHS))
+if(abs(LHS-RHS) < 10^(-10))
     disp("Periodic");
 else
     disp("Not Periodic");
 end
+
+
 % Symmetric
-LHS = Wn^(k+floor(N/2))
-RHS = -Wn^(k)
-if(isequal(LHS,RHS))
-    disp("Symmetric");
-else
-    disp("Not Symmetric");
-end
+% Wn^(nk+(N/2)) = -Wn^(nk)
+LHS = Wn^(n*k+(N/2));
+disp("LHS = "+LHS);
+RHS = -Wn^(n*k);
+disp("RHS = "+RHS);
+disp("LHS-RHS = "+abs(LHS-RHS));
+ if(abs(LHS-RHS) < 10^(-10))
+     disp("Symmetric");
+ else
+     disp("Not Symmetric");
+ end
