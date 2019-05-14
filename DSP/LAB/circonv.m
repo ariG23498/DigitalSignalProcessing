@@ -1,5 +1,5 @@
 function [outputArg1] = circonv(x,h,l)
-x1 = zeros(l,1);
+x1 = zeros(l,l);
 shift = 0;
 for i=1:l
     for j=1:l
@@ -11,6 +11,10 @@ for i=1:l
     end
     shift = shift+1;
 end
-outputArg1 = x1*h;
+disp(x1);
+outputArg1 = x1*h';
+disp("Aritra= "+outputArg1);
+[o] = cconv(x,h,l);
+disp("Matlab= "+o);
 end
 
